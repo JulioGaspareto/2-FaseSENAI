@@ -1,0 +1,11 @@
+.navbar-container{
+    background-color: rgb(250, 223, 171);
+    border-color: black;
+   border-style: solid ;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    gap: 25px;
+
+}
