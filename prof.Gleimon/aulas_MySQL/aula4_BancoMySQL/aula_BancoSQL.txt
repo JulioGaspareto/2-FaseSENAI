@@ -1,0 +1,47 @@
+create database EmpresaXPTO;
+
+use EmpresaXPTO;
+
+create table fornecedor(
+id_fornecedor int not null auto_increment,
+nome varchar(75),
+nacionalidade varchar(75),
+primary key(id_fornecedor)
+);
+
+create table peca(
+id_peca int not null auto_increment,
+nome varchar(75),
+peso decimal(8,2),
+ano_fabricacao date,
+fornecedor_id int,
+primary key(id_peca)
+);
+-- pra adicionar algo na coluna
+ALTER TABLE peca
+ADD FOREIGN KEY (fornecedor_id) -- aqui vai adicionar a chave estrangera ao fornecedor_id na coluna
+REFERENCES fornecedor (id_fornecedor); -- e aqui vai pegar a referencia de onde ta saindo isso 
+
+-- o DROP serve para apagar 
+CREATE DATABASE banco_apagar;
+DROP DATABASE banco_apagar;
+
+-- para apagar uma coluna
+ALTER TABLE peca 
+DROP COLUMN peso;
+
+-- adicionar algo
+ALTER TABLE peca
+ADD COLUMN peso DECIMAL(8,2);
+
+-- esse é um exemplo do peso mais rapido 
+
+CREATE TABLE peca(
+id_peca INT NOT NULL AUTO_INCREMENT PRIMARY KEY, -- aqui vamos tacar toda tipagem da coluna
+nome VARCHAR(75),
+peso DECIMAL (8,2),
+ano_fabricacao DATE,
+fornecedor_id int, -- na hora de criar uma coluna para colocar a chava estrangeira colocar como int pra nao da ruim
+FOREIGN KEY (fornecedor_id) REFERENCES fornecedor (id_fornecedor)
+);
+
