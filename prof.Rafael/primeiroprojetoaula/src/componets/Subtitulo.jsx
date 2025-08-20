@@ -5,7 +5,7 @@ function Subtitulo(props) {
     <h2 className='subtitulo-container'>
         {props.testando}
         {props.emoji}
-
+        
         {console.log(props)}
     </h2>
   )

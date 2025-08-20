@@ -1,4 +1,8 @@
 .corpo-container{
-   background-color:rgb(244, 232, 217);
+   background-color:#e9e0d1;
    height: calc(100vh - 70px);
+}
+
+.imagem-corpo{
+   width: 150px;
 }

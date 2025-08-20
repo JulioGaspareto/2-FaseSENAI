@@ -1,9 +1,9 @@
 import './Texto.css'
 
-function Texto() {
+function Texto(props) {
   return (
     <div className='texto-container'>
-       <h1>Pular Na cama elastica</h1>
+       {props.oTexto}
         </div>
   )
 }

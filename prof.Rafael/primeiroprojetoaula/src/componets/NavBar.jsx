@@ -2,9 +2,21 @@ import './NavBar.css'
 function navBar() {
   return (
     <div className='navbar-container'>
-        <a href="">home</a>
-        <a href="">perfil</a>
-        <a href="">contato</a>
+        <a href="">
+          <img src="./imagens/icon_home.svg" alt="" />
+          <br />
+          home
+          </a>
+        <a href="">
+          <img src="./imagens/icon_perfil.svg" alt="" />
+          <br />
+          perfil
+          </a>
+        <a href="">
+          <img src="./imagens/icon_contato.svg" alt="" />
+          <br />
+          contato
+          </a>
     </div>
   )
 }
