@@ -45,3 +45,11 @@ fornecedor_id int, -- na hora de criar uma coluna para colocar a chava estrangei
 FOREIGN KEY (fornecedor_id) REFERENCES fornecedor (id_fornecedor)
 );
 
+
+-- para alterar uma chave estrageira
+
+ALTER TABLE peca
+DROP FOREIGN KEY fornecedor_id  -- nao è bem esse o nome< para isso voce tem que ver na pasta qual o nome da chava estrangeira
+
+-- apos voce remover que essa è a chava estrangeira, se torna possivel deletar a tabela 
+
