@@ -1,0 +1,11 @@
+.fundodo{
+    background-color: #ef97a4;;
+     border-width: 100000px black ;
+     /* border-color:black; */
+    border-style: solid ;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    gap: 20%;
+}
