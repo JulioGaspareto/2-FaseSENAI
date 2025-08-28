@@ -1,0 +1,113 @@
+CREATE DATABASE banco;
+USE banco;
+
+CREATE TABLE categoria_cliente(
+id_categoria_cliente INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+nom_categoria VARCHAR(100)
+);
+
+CREATE TABLE tipo_conta(
+id_tipo_conta INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+descricao VARCHAR(100)
+);
+
+
+CREATE TABLE agencia(
+id_agencia INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+nom_agencia VARCHAR(100)
+);
+
+CREATE TABLE cliente(
+id_cliente INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+nome VARCHAR(100),
+CPF BIGINT(11),
+CNPJ BIGINT(14),
+rua VARCHAR(75),
+numero INT,
+bairro VARCHAR(45),
+CEP int,
+cidade VARCHAR(45),
+estado VARCHAR(45),
+categoria_cliente_id INT,
+FOREIGN KEY(categoria_cliente_id) REFERENCES categoria_cliente(id_categoria_cliente)
+);
+
+CREATE TABLE conta(
+id_conta INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+val_saldo DECIMAL,
+agencia_id INT,
+FOREIGN KEY(agencia_id) REFERENCES agencia(id_agencia),
+tipo_conta_id INT,
+foreign key(tipo_conta_id) REFERENCES tipo_conta(id_tipo_conta),
+cliente_id INT,
+FOREIGN KEY(cliente_id) REFERENCES cliente(id_cliente)
+);
+
+ALTER TABLE cliente
+ADD COLUMN num_celular BIGINT(11);
+
+ALTER TABLE cliente
+RENAME COLUMN num_celular TO telefone;
+
+ALTER TABLE categoria_cliente
+ADD COLUMN descricao VARCHAR(100);
+
+ALTER TABLE cliente
+ADD COLUMN renda DECIMAL(8,2);
+
+ALTER TABLE tipo_conta
+MODIFY COLUMN descricao TEXT;
+
+ALTER TABLE categoria_cliente
+MODIFY COLUMN descricao TEXT;
+
+
+ALTER TABLE agencia
+MODIFY COLUMN nom_agencia VARCHAR(45);
+
+ALTER TABLE cliente 
+DROP COLUMN estado;
+
+ALTER TABLE categoria_cliente
+RENAME TO categoria;
+
+ALTER TABLE tipo_conta
+ADD COLUMN observacao TEXT;
+
+
+
+-- populando uma categoria
+INSERT INTO categoria
+(nom_categoria)
+VALUE
+('private');
+
+
+-- populando com mais de uma categoria
+INSERT INTO categoria
+(nom_categoria)
+VALUE
+('Basico'),
+('publico');
+
+
+INSERT INTO cliente
+(nome,CPF,rua,cidade,categoria_cliente_id)
+VALUE 
+('vini','123456789','abc','cidad','3');
+
+
+SELECT * FROM categoria;
+SELECT * FROM cliente;
+
+INSERT INTO cliente
+(nome,cpf,rua,CEP,telefone,categoria_cliente_id)
+VALUES
+('Julio','948739','opa','43222','348373','1'),
+('isac','3423572','noni','65424','5424454','2'),
+('Alberto','543423','capicorno','44354','44543','4'),
+('rodrigo','654676','vernampo','15466','544311','3'),
+('jhenny','785435','polinopolá','23476','65322','1'),
+('kymmer','245542','vempro','23654','7433','3'),
+('Ana','54254365','tupi','97265','654465','2'),
+('Yuri','543574','fugilo','65445','328643','4');
