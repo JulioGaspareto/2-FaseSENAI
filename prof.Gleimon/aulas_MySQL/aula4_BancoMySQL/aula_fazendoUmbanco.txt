@@ -111,3 +111,40 @@ VALUES
 ('kymmer','245542','vempro','23654','7433','3'),
 ('Ana','54254365','tupi','97265','654465','2'),
 ('Yuri','543574','fugilo','65445','328643','4');
+
+
+-- segunda aula finalizando banco de dados 
+
+
+INSERT INTO agencia
+(nom_agencia)
+VALUE 
+('Campeche'),
+('Ingleses'),
+('Centro');
+
+SELECT * FROM agencia;
+
+
+INSERT INTO tipo_conta
+(descricao)
+VALUE 
+('Poupança'),
+('Corrente');
+
+INSERT INTO conta
+(cliente_id,agencia_id, tipo_conta_id)
+VALUE 
+('1','2','2'),
+('2','1','1'),
+('3','3','2'),
+('4','2','1'),
+('5','1','1'),
+('6','1','1'),
+('7','2','2'),
+('8','3','1');
+
+SELECT * FROM cliente;
+SELECT * FROM agencia;
+SELECT * FROM tipo_conta;
+SELECT * FROM conta;
