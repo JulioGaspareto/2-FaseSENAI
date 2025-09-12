@@ -1,8 +1,11 @@
-.Avisador-container{
-    justify-items: center;
+.avisador-container{
     display: flex;
+    justify-items: center;
     align-items: center;
     flex-direction: column;
-    width: 3px;
-    border: red;
+    width: 500px;
+    border:1px;
+    background-color: rgba(95, 29, 236, 0.47);
+    border-radius: 3px;
+    
 }

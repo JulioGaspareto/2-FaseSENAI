@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import './App.css'
 import Avisador from './componets/Avisador'
+import Calculadora from './componets/Calculadora'
 
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
   return (
     <>
      <Avisador/>
+     <Calculadora/>
     </>
   )
 }
