@@ -1,0 +1,84 @@
+CREATE DATABASE regras_constraint;
+
+USE regras_constraint;
+
+CREATE TABLE usuario(
+id_cliente INT AUTO_INCREMENT PRIMARY KEY,
+cpf BIGINT UNIQUE,
+pais VARCHAR (50) DEFAULT 'Brasil',
+graduado ENUM('sim','nao'),
+num_filhos INT
+CHECK (num_filhos >=0));
+
+SELECT * FROM usuario;
+
+ALTER TABLE usuario
+add nome VARCHAR(50) NOT NULL;
+
+
+ 
+ -- Teste para verificar constraint NOT NULL
+INSERT INTO usuario
+(cpf,pais,graduado,num_filhos)
+value
+(12345432231, 'Brasil', 'sim', 2);
+
+-- corrigido 
+INSERT INTO usuario
+(nome,cpf,pais,graduado,num_filhos)
+value
+('Carlos',12345432231, 'Brasil', 'sim', 2);
+
+
+ -- Teste para verificar constraint UNIQUE (COLOCANDO O MSM CPF)
+INSERT INTO usuario
+(nome,cpf,pais,graduado,num_filhos)
+value
+('Rodrigo',12345432231, 'Brasil', 'sim', 5);
+
+-- Corrigido 
+INSERT INTO usuario
+(nome,cpf,pais,graduado,num_filhos)
+value
+('Rodrigo',42335482437, 'Brasil', 'sim', 5);
+
+
+SELECT * FROM usuario;
+
+
+-- Testando para verificar Constraint DEFAULT (deixar o pais vazio)
+INSERT INTO usuario
+(nome,cpf,graduado,num_filhos)
+value
+('Jhennyfer',633434865438, 'nao', 0);
+
+
+-- Testando para verificar Constraint ENUM (colocar graduaçao incompleto)
+INSERT INTO usuario
+(nome,cpf,graduado,num_filhos)
+value
+('Ana',031456465461, 'Incompleto', 2);
+
+
+-- corrigido (tem que colocar o valor definido no ENUM)
+INSERT INTO usuario
+(nome,cpf,graduado,num_filhos)
+value
+('Ana',031456465461, 'sim', 2);
+
+
+-- Testando para verificar Constraint CHECK (colocar um numero negativo
+INSERT INTO usuario
+(nome,cpf,graduado,num_filhos)
+value
+('Beto',931236465474, 'nao', -1);
+
+
+-- corrigido 
+INSERT INTO usuario
+(nome,cpf,graduado,num_filhos)
+value
+('Beto',931236465474, 'nao', 10);
+
+
+
