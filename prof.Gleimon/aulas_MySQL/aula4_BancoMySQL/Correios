@@ -1,0 +1,26 @@
+CREATE DATABASE correios ;
+use correios;
+
+-- no DATE para popular é invertido exp 2025-09-24
+
+CREATE TABLE cliente(
+id_cliente INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+nome VARCHAR(45),
+cidade VARCHAR(45)
+);
+
+CREATE TABLE acompanhamento(
+id_acompanhamento INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+situacao VARCHAR(45)
+);
+
+
+CREATE TABLE pedido(
+id_pedido INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+data_pedido DATE,
+valor DECIMAL(8,2),
+cliente_id INT ,
+FOREIGN KEY(cliente_id) REFERENCES cliente(id_cliente),
+acompanhamento_id INT,
+FOREIGN KEY(acompanhamento_id) REFERENCES acompanhamento(id_acompanhamento)
+);
