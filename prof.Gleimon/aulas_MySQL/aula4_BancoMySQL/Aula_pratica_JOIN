@@ -60,3 +60,8 @@ UNION
 select pai.nome_pai,filho.nome_filho from pai
 LEFT JOIN filho 
 ON pai.filho_id = filho.id_filho ;
+
+-- Uma coisa legal é mudar o nome da consulta.
+SELECT pai.nome_pai AS pai_do_ano, filho.nome_filho AS Filhote FROM pai 
+RIGHT JOIN filho 
+ON pai.filho_id = filho.id_filho ;
