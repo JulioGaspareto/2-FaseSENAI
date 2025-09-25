@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import Primeiro from './components/Primeiro'  
 import Segundo from './components/Segundo'
+import Terceiro from './components/Terceiro'
 function App() {
   const [count, setCount] = useState(0)
 const preco = {
@@ -22,6 +23,8 @@ const taxas = {
     <Primeiro preco={preco}/>
     
     <Segundo/>
+
+    <Terceiro/>
     </div>
     </>
   )

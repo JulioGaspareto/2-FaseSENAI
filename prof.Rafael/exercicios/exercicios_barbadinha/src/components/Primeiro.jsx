@@ -1,5 +1,5 @@
 import React from 'react'
-import './Primeiro.css'
+import './Estiloso.css'
 import { useState } from "react";
 
 
@@ -27,7 +27,7 @@ const [valorSelecionado, setValorSelecionado] = useState(null);
         <button onClick={Totalmedia}>media</button>
         <button onClick={Totalgrande}>grande</button>
 
-        
+    
         {valorSelecionado !== null && (<p>o valor da pizza é ${valorSelecionado}</p>)}
     </div>
   )

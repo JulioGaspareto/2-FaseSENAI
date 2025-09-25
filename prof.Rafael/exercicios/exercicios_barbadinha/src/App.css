@@ -1,0 +1,10 @@
+.estilo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(127, 136, 255);
+    border: 3px;
+    border-color: aqua;
+    width: 300px;
+}
