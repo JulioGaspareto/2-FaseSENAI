@@ -1,0 +1,76 @@
+CREATE DATABASE banco_JG; 
+USE banco_JG;
+
+CREATE TABLE cliente (
+id_cliente INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+nome VARCHAR (75)
+);
+
+CREATE TABLE mensalidade (
+id_mensalidade INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+valor DECIMAL(5,2),
+status_pagamento ENUM("Fatura Paga","Em Débito"),
+cliente_id INT,
+FOREIGN KEY (cliente_id) REFERENCES cliente(id_cliente) 
+);
+
+
+INSERT INTO cliente 
+(nome)
+VALUE
+('Jose'),
+('Carlos'),
+('Marcos')
+;
+
+INSERT INTO mensalidade 
+(cliente_id,valor,status_pagamento)
+VALUE
+('1',650.00,"Fatura Paga"),
+('2',670.00,"Fatura Paga"),
+('3',690.00,"Fatura Paga"),
+('1',720.00,"Em Débito"),
+('2',740.00,"Em Débito"),
+('3',760.00,"Em Débito"),
+('3',800.00,"Em Débito")
+;
+
+SELECT * FROM mensalidade;
+
+
+-- ele serve para contar neste caso quantos status de pagamento existem
+SELECT count(mensalidade.status_pagamento) AS contagem_mensalidade FROM mensalidade;
+
+
+-- para saber a quantidade de mensalidade por cliente precisei usar o JOI Npara juntar a tabela cliente e
+-- a tabela mensalidade e utilizei o GROUP BY para agurpar que alem de agrupar ele nao repete 
+SELECT cliente.nome, count(mensalidade.status_pagamento) FROM mensalidade
+JOIN cliente
+ON cliente.id_cliente = mensalidade.cliente_id
+GROUP BY cliente.nome 
+;
+
+-- somatorio do f=valor mensalidade por cliente 
+SELECT cliente.nome, sum(mensalidade.valor) AS somatorio_mensalidade FROM mensalidade
+JOIN cliente
+ON cliente.id_cliente = mensalidade.cliente_id
+GROUP BY cliente.nome 
+;
+
+
+-- saber qual a media do valor mensalidade existentes (seja paga ou debito) por cada cliente 
+-- o avg é oq tras a media, é uma abreviaçao
+SELECT cliente.nome, avg(mensalidade.valor) AS somatorio_mensalidade FROM mensalidade
+JOIN cliente
+ON cliente.id_cliente = mensalidade.cliente_id
+GROUP BY cliente.nome 
+;
+
+-- so somar o valor da mensalidade em debito
+SELECT cliente.nome, sum(mensalidade.valor) AS somatorio_mensalidade FROM mensalidade
+JOIN cliente
+ON cliente.id_cliente = mensalidade.cliente_id
+WHERE mensalidade.status_pagamento = 'Em Débito'
+GROUP BY cliente.nome 
+;
+
