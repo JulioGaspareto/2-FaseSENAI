@@ -1,0 +1,44 @@
+CREATE DATABASE espacionamento_xpto ;
+
+CREATE TABLE estacionamento(
+id_estacionamento INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+nome VARCHAR(75),
+capacidade INT,
+subsolo ENUM('sim','Não'),
+especial ENUM('sim','Não')
+);
+
+INSERT INTO estacionamento
+(nome,capacidade,subsolo,especial)
+VALUE
+('Estacionamento A',20,'Não','Não'),
+('Estacionamento B',35,'Sim','Sim'),
+('Estacionamento C',40,'Sim','Sim'),
+('Estacionamento D',50,'Sim','Sim'),
+('Estacionamento E',15,'Sim','Não'),
+('Estacionamento F',85,'Sim','Sim'),
+('Estacionamento G',100,'Não','Não')
+;
+
+SELECT nome,capacidade FROM estacionamento -- selecionamos a tabela com oq vai aparecer
+WHERE capacidade >= 20 AND capacidade <= 40 AND subsolo = 'Sim' AND especial = 'Sim' -- apos isso, eu peguei e selecionei um filtro para isso tem outra maneira de fazer isso
+ORDER BY capacidade ASC; -- aqui coloca em ordem 
+
+SELECT nome, capacidade FROM estacionamento 
+WHERE capacidade < 50 
+ORDER BY capacidade DESC 
+;
+
+
+SELECT nome, capacidade FROM estacionamento 
+WHERE capacidade <= 80 OR nome = 'Estacionamento B'
+;
+
+SELECT nome, capacidade FROM estacionamento
+WHERE especial = 'Sim' AND subsolo = 'sim'
+;
+
+-- fazer do ms jeito so que com outro comando
+SELECT nome, capacidade FROM estacionamento 
+WHERE capacidade BETWEEN 20 AND 40
+;
