@@ -1,0 +1,13 @@
+.navBarTop{
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    gap: 20px;   
+    background-color:#7db4b5 ;
+
+    height: 60px;
+    padding: 0 30px;     
+ 
+}
+
+
