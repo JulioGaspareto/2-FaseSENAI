@@ -1,0 +1,20 @@
+meta {
+  name: create-cliente
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://127.0.0.1:3000/clientes
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "nome": "rodrigo",
+    "endereco": "rua Tals",
+    "email": "lolo@gmail",
+    "telefone":"2312"
+  }
+}
