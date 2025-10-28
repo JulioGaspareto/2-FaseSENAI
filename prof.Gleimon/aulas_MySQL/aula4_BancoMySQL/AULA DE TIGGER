@@ -1,0 +1,110 @@
+CREATE DATABASE banco_trigger;
+USE banco_trigger;
+
+CREATE TABLE produto (
+id_produto INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+nome VARCHAR(75),
+preco DECIMAL(8,2),
+estoque INT
+);
+
+CREATE TABLE pedido(
+id_pedido INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+data_horario DATETIME,
+quantidade INT,
+estoque INT,
+produto_id INT,
+FOREIGN KEY(produto_id) REFERENCES produto(id_produto)
+);
+
+INSERT INTO produto 
+(nome,preco,estoque)
+VALUE
+("caderno",'19.00',200),
+("caneta",'5.00',500),
+("lapis",'3.00',1000)
+;
+-- primeiro cria o Trigger dps bota uma regra, que no caso ele vai funcionar dps que for enserido algo no pedido
+-- na linha For Each ele pega e coloca pra onde vai, no caso vai fazer isso para todas as linhas 
+-- Begin ele diz onde começa e o End onde termina
+-- ele vai atualizar o produto  colocando a nova quantidade 
+
+DELIMITER $$
+CREATE TRIGGER estoque_atualizado 
+AFTER INSERT ON pedido
+FOR EACH ROW 
+BEGIN
+UPDATE produto
+SET produto.estoque = produto.estoque  - new.quantidade
+WHERE produto.id_produto = new.produto_id;
+END;
+$$
+
+INSERT INTO pedido 
+(data_horario,quantidade,produto_id)
+VALUE
+('2025-10-16 19:30:00',49,1);
+
+-- se tudo ocorreu bem na tabela do produto na parte do caderno tem que ter atualizado para 151
+
+SELECT * FROM produto;
+SELECT * FROM pedido;
+
+
+-- ATIVIDADE
+
+
+CREATE DATABASE ipiranga;
+USE ipiranga;
+
+CREATE TABLE posto(
+id_posto INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+preco DECIMAL(5,2) DEFAULT 6.50,
+estoque INT
+);
+
+
+CREATE TABLE veiculo(
+id_veiculo INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+placa VARCHAR(75),
+litros_abastecido INT,
+posto_id INT,
+FOREIGN KEY(posto_id) REFERENCES posto(id_posto)
+);
+ 
+ 
+DELIMITER $$
+CREATE TRIGGER estoque_atualizado 
+AFTER INSERT ON veiculo
+FOR EACH ROW 
+BEGIN
+UPDATE posto
+SET posto.estoque = posto.estoque  - new.litros_abastecido
+WHERE posto.id_posto= new.posto_id;
+END;
+$$
+
+SELECT * FROM posto;
+SELECT * FROM 
+
+
+INSERT INTO posto
+(preco,estoque)
+VALUE 
+('6.50',400),
+('6.50',500),
+('6.50',600),
+('6.50',700)
+;
+
+
+INSERT INTO veiculo
+(placa,litros_abastecido, posto_id)
+VALUE 
+("jhD-2131",300,1)
+
+
+ALTER TABLE posto
+MODIFY COLUMN estoque INT CHECK( estoque > 0);
+
+
