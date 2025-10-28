@@ -1,0 +1,36 @@
+CREATE DATABASE lojinha_julio;
+USE lojinha_julio;
+
+CREATE TABLE pedido(
+id_pedido INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+data_horario DATETIME ,
+tipo_entrega ENUM("Normal","Urgente"),
+preco DECIMAL(5,2),
+quantidade INT,
+valor_total DECIMAL(8,2),
+valor_total_com_desconto DECIMAL(8,2)
+);
+
+
+DELIMITER $$
+CREATE TRIGGER valores 
+BEFORE INSERT ON pedido
+FOR EACH ROW 
+BEGIN
+SET new.valor_total = new.preco  * new.quantidade;
+SET new.valor_total_com_desconto = new.valor_total * 0.9;
+END;
+$$
+
+INSERT INTO pedido 
+(data_horario,tipo_entrega,preco,quantidade)
+VALUE
+('2025-07-02','Urgente','159.00',1),
+('2025-07-06','Normal','20.00',64),
+('2025-05-08','Urgente','25.00',3),
+('2025-02-10','Normal','10.00',15)
+;
+
+
+
+SELECT * FROM pedido
