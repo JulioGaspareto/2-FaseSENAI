@@ -108,3 +108,64 @@ ALTER TABLE posto
 MODIFY COLUMN estoque INT CHECK( estoque > 0);
 
 
+-- codigo explicado por IA --
+
+-- Criando o banco de dados
+CREATE DATABASE Aprendendo_TRIGGER;
+
+-- Selecionando o banco (opcional, mas recomendado)
+USE Aprendendo_TRIGGER;
+
+-- Criando a tabela de produtos
+CREATE TABLE produto(
+    id_produto INT NOT NULL AUTO_INCREMENT PRIMARY KEY, -- identificador único do produto
+    nome VARCHAR(256),                                  -- nome do produto
+    preco DECIMAL(8,2),                                 -- preço do produto (8 dígitos, 2 decimais)
+    estoque INT                                         -- quantidade em estoque
+);
+
+-- Criando a tabela de pedidos
+CREATE TABLE pedido(
+    id_pedido INT NOT NULL AUTO_INCREMENT PRIMARY KEY,  -- identificador único do pedido
+    data_horario DATETIME,                              -- data e hora do pedido
+    quantidade INT,                                     -- quantidade comprada
+    produto_id INT,                                     -- ID do produto comprado
+    FOREIGN KEY (produto_id) REFERENCES produto(id_produto) -- chave estrangeira ligando ao produto
+);
+
+-- Inserindo alguns produtos
+INSERT INTO produto (nome, preco, estoque)
+VALUES
+('caderno', 19.00, 200),   -- produto 1
+('caneta', 5.00, 500),     -- produto 2
+('lápis', 3.00, 1000);     -- produto 3
+
+-- Mudando o delimitador para criar o gatilho (trigger)
+DELIMITER $$
+
+-- Criando o trigger que vai atualizar o estoque automaticamente
+CREATE TRIGGER estoque_atualizado
+AFTER INSERT ON pedido          -- dispara depois que um pedido for inserido
+FOR EACH ROW                    -- roda para cada linha inserida
+BEGIN
+    -- Atualiza o estoque do produto comprado
+    UPDATE produto
+    SET produto.estoque = produto.estoque - NEW.quantidade -- diminui o estoque pela quantidade do pedido
+    WHERE produto.id_produto = NEW.produto_id;             -- atualiza apenas o produto certo
+END;
+$$
+
+-- Voltando o delimitador ao normal
+DELIMITER ;
+
+-- Inserindo um pedido (isso vai ativar o trigger automaticamente)
+INSERT INTO pedido (data_horario, quantidade, produto_id)
+VALUES ('2025-10-16 19:30:00', 49, 1); -- compra de 49 cadernos (produto ID 1)
+
+-- Visualizando os pedidos feitos
+SELECT * FROM pedido;
+
+-- Visualizando os produtos com estoque atualizado
+SELECT * FROM produto;
+
+
