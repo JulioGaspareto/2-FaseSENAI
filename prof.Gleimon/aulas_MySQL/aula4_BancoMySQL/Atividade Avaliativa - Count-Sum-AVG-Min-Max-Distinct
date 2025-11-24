@@ -45,3 +45,21 @@ FROM produto;
 SELECT DISTINCT produto_id
 FROM pedido;
 
+
+-- 7. COUNT(DISTINCT ...) — Conta valores únicos
+
+-- Conta quantos produtos diferentes foram pedidos
+SELECT COUNT(DISTINCT produto_id) AS produtos_unicos
+FROM pedido;
+
+
+-- Exemplo final juntando tudo
+
+-- Estatísticas gerais da tabela produto
+SELECT
+    COUNT(*) AS total_produtos,            -- quantos produtos existem
+    SUM(estoque) AS soma_estoque,          -- estoque total
+    AVG(preco) AS preco_medio,             -- média dos preços
+    MIN(preco) AS menor_preco,             -- menor preço
+    MAX(preco) AS maior_preco              -- maior preço
+FROM produto;
