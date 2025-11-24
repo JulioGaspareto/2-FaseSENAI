@@ -1,0 +1,47 @@
+-- 1. COUNT() — Contar linhas
+
+-- Conta quantos produtos existem na tabela
+SELECT COUNT(*) AS total_produtos
+FROM produto;
+
+
+-- 2. SUM() — Somar valores
+
+-- Soma o estoque de todos os produtos
+SELECT SUM(estoque) AS estoque_total
+FROM produto;
+
+
+-- 3. AVG() — Média dos valores
+
+-- Calcula a média dos preços dos produtos
+SELECT AVG(preco) AS media_precos
+FROM produto;
+
+
+-- 4. MIN() — Pega o menor valor
+
+-- Encontra o menor preço entre os produtos
+SELECT MIN(preco) AS menor_preco
+FROM produto;
+
+
+-- 5. MAX() — Pega o maior valor
+
+-- Encontra o maior estoque
+SELECT MAX(estoque) AS maior_estoque
+FROM produto;
+
+-- 6. DISTINCT — Remove valores repetidos
+
+
+-- | id | produto_id | quantidade |
+-- | -- | ---------- | ---------- |
+-- | 1  | 1          | 10         |
+-- | 2  | 1          | 2          |
+-- | 3  | 3          | 5          |
+
+-- Mostra quais produtos já foram pedidos (sem repetir)
+SELECT DISTINCT produto_id
+FROM pedido;
+
